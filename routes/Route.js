@@ -11,11 +11,11 @@ Route.get("/", function (req, res) {
 });
 
 Route.get("/saved", function (req, res) {
-    db.Article.find({ saved: true }).then(function (article) {
-        res.render("savedArticles", { article: article });
-    }).catch(function (error) {
-        res.send(err);
-    })
+    db.Article.find({ saved: true })
+    .populate("note")
+    .exec(function (err,articles) {
+        res.render("index", { article: articles });
+    });
 });
 
 //console.log(object);

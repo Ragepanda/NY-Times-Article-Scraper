@@ -1,12 +1,29 @@
- 
-{{#each article}} {{#if saved}}
-  <div data-_id="{{_id}}" class="card">
+ {{#each article}} {{#if saved}}
+<div data-_id="{{_id}}" class="card">
     <div class="card-header">
-      <h3>
-        <a class="article-link" target="_blank" rel="noopener noreferrer" href="{{link}}">{{title}}</a>
-        <a class="btn btn-success save">Save Article</a>
-      </h3>
+        <h3>
+            <a class="article-link" target="_blank" rel="noopener noreferrer" href="{{link}}">{{title}}</a>
+            <a class="btn btn-success save">Save Article</a>
+        </h3>
     </div>
     <div class="card-body">{{summary}}</div>
-  </div>
-  {{/if}} {{/each}}
+    <br>
+
+    <ul class="list-group">
+
+        <form class="note input-group mb-3">
+            <input type="text" name="note" class="note-field" data-_id="{{_id}}">
+            <a class="btn note-submit">Submit Comment</a>
+        </form>
+
+        <h2>Comments</h2>
+        {{#if note}} {{#each note}}
+        <li class="list-group-item" data-_id={{_id}}>
+            {{body}}
+            <image src="/assets/images/delete.png" height="25" width="25" class="delete-note" />
+
+        </li>
+        {{/each}} {{/if}}
+    </ul>
+</div>
+{{/if}} {{/each}}
