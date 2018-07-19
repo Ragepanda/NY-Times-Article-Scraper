@@ -12,12 +12,19 @@
 
         <ul class="list-group">
 
-            <form class="note">
+            <form class="note input-group mb-3">
                 <input type="text" name="note" class="note-field" data-_id="{{_id}}">
-                <a class="btn btn-danger note-submit">Submit Note</a>
+                <a class="btn note-submit">Submit Comment</a>
             </form>
 
-            {{#if note}} {{#each note}} {{/each}} {{/if}}
+            <h2>Comments</h2>
+            {{#if note}} {{#each note}}
+            <li class="list-group-item" data-_id={{_id}}>
+                {{body}}
+                <image src="/assets/images/delete.png" height="25" width="25" class="delete-note" />
+
+            </li>
+            {{/each}} {{/if}}
         </ul>
 
     </div>

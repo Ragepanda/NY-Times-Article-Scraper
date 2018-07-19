@@ -4,8 +4,21 @@ $(document).ready(function () {
   var articleContainer = $(".article-container");
   $(document).on("click", ".btn.save", handleArticleSave);
   $(document).on("click", ".scrape-new", handleArticleScrape);
-  $(document).one("click", ".note-submit", handleArticleNote);
+  $(document).on("click", ".note-submit", handleArticleNote);
   $(".clear").on("click", handleArticleClear);
+  $(document).on("click", ".delete-note", handleNoteDelete);
+
+  function handleNoteDelete(){
+    var noteToDelete = $(this).parents("li").data();
+    console.log(noteToDelete);
+
+    $.ajax({
+      method: "DELETE",
+      url: "/api/note/" + noteToDelete._id,
+    }).then(function(response){
+      location.reload();
+    })
+  }
 
 
   function handleArticleNote() {
@@ -61,7 +74,9 @@ $(document).ready(function () {
 
   function handleArticleScrape() {
     $.get("/api/fetch").then(function (data) {
-      location.reload();
+      $(".caption").html("<div id='loader'></div>");
+      setTimeout(function(){ location.reload() }, 8000);
+      
     });
   }
 

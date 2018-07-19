@@ -170,4 +170,46 @@ html {
     position: relative;
     bottom: 10px;
   }
+
+  .delete-note{
+    position: absolute;
+    left: 90%;
+    cursor: pointer;
+  }
+
+  .note-submit{
+    margin-left:15px;
+    background-color:#0c7cd5;
+  }
+  form .note-field{
+    width: 60%;
+    border: 2px solid #0c7cd5;
+  }
+
+  #loader {
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+  
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
   
