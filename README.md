@@ -20,6 +20,8 @@ Technologies Used:
 - Axios (for loading DOM to scrape)
 
 Click Here to demo the app for yourself!
+
+
 [![Mongo Scraper App](/public/assets/images/example.gif)](https://woltz-scraper.herokuapp.com/)
 
 Click Here to see a video demonstration:
