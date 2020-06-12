@@ -3,43 +3,52 @@ var Api = express.Router();
 var db = require("../models");
 var cheerio = require("cheerio");
 var axios = require("axios");
+var request = require("request");
 
 
 
 
 Api.get("/api/fetch", function (req, res) {
-    axios.get("https://www.nytimes.com/").then(function (response) {
-        var $ = cheerio.load(response.data);
-        var results = [];
+    request({ url: "https://www.nytimes.com/", gzip: true }, (error, response, html) => {
+        if (!error && response.statusCode == 200) {
+            var $ = cheerio.load(html);
+            var results = [];
 
+            //console.log($("article"));
+            $("article").each(function (index, element) {
+                console.log($(element).find("h2").text());
+                console.log("nytimes.com"+$(element).find("a").attr("href"));
+                console.log($(element).find("p").text());
 
-        $("article").each(function (index, element) {
-            var result = {};
-            result.title = $(element).children("h2").children("a").text();
-            result.link = $(element).children("h2").children("a").attr("href");
-            result.summary = $(element).children(".summary").text();
+                var result = {};
+                result.title = $(element).find("h2").text();
+                result.link = "nytimes.com"+$(element).find("a").attr("href");
+                result.summary = $(element).find("p").text();
+                console.log(result);
+                // filters out any scraped articles lacking a title, link or summary
+                if (!(result.title === "" || result.link === "" || result.summary === "")) {
 
-            // filters out any scraped articles lacking a title, link or summary
-            if (!(result.title === "" || result.link === "" || result.summary === "")) {
-
-                // Checks the DB for duplicate titles 
-                // ***** TODO: Add authentication for link/summary matching too
-                db.Article.find({ title: result.title }).
-                    then(function (response) {
-                        // If the length of the response is 0, it means there's no duplicate
-                        if (!response.length) {
-                            results.push(result);
-                            db.Article.create(result).
-                                then(function (dbArticle) {
-                                })
-                        }
-                    })
-                    .catch(function (err) {
-                        throw err;
-                    })
-            }
-        })
-        res.json(results);
+                    // Checks the DB for duplicate titles 
+                    // ***** TODO: Add authentication for link/summary matching too
+                    db.Article.find({ title: result.title }).
+                        then(function (response) {
+                            // If the length of the response is 0, it means there's no duplicate
+                            if (!response.length) {
+                                results.push(result);
+                                db.Article.create(result).
+                                    then(function (dbArticle) {
+                                    })
+                            }
+                        })
+                        .catch(function (err) {
+                            throw err;
+                        })
+                }
+            })
+            res.json(results);
+        }
+        else
+        console.log(error);
     })
 });
 

@@ -79,7 +79,11 @@ html {
   .card {
     border-radius: 0;
     box-shadow: 3px 3px 20px lightslategrey;
-    margin: 20px 0;
+    width: 90%;
+    border-radius: 25px;
+    margin:auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
   
   .card .card-header {
@@ -87,6 +91,8 @@ html {
     position: relative;
     padding-top: 30px;
     padding-bottom: 30px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
   }
   
   .card .card-header h3, 
@@ -171,10 +177,18 @@ html {
     bottom: 10px;
   }
 
+  .list-group-item{
+    border: 0px;
+  }
+
   .delete-note{
     position: absolute;
     left: 90%;
     cursor: pointer;
+  }
+
+  .delete-note:hover{
+    zoom: 1.25;
   }
 
   .note-submit{
