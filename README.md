@@ -28,7 +28,7 @@ An application using Node.js, Express, MongoDB/Mongoose and Cheerio that scrapes
 **See It In Action**
 
  * Check out the app: https://woltz-scraper.herokuapp.com/
- * See a [video demonstration] (https://www.youtube.com/watch?v=YJheQ9d1j_w)
+ * See a [video demonstration](https://www.youtube.com/watch?v=YJheQ9d1j_w)
 
 
 [![Mongo Scraper App](/public/assets/images/example.gif)](https://woltz-scraper.herokuapp.com/)
